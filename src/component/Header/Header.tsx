@@ -5,7 +5,7 @@ import motherlandLogo from '../../images/home/logo.png'
 
 const Header: FC = () => {
   return (
-    <header className="container mx-auto px-4">
+    <header className="container mx-auto px-4 shadow">
       <div className="flex flex-row items-center justify-between py-4" style={{ height: 'inherit' }}>
         <div>
           <Link to="/">

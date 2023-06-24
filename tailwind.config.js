@@ -7,6 +7,7 @@ module.exports = {
     extend: {
       colors: {
         blackColor: '#040404',
+        sideBarColor: '#080606',
         yellowColor: 'rgba(241, 164, 29, 1)'
       }
     },
