@@ -1,6 +1,6 @@
 export enum Routes {
     login = '/login',
-    dashboard = '/dashboard'
+    dashboard = '/dashboard',
   }
 
   export const routes = {

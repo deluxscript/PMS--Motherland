@@ -64,3 +64,37 @@ export function loginAuthentication(data: AuthenticationData): Promise<Authentic
   return apiRequest('/login', 'POST', data)
     .then(res => res.json())
 }
+export type PlayersProfile = {
+  id: number
+  name: string
+  position: string
+  imageurl: string
+}
+
+export function getAllPlayers(): Promise<PlayersProfile[]> {
+  return apiRequest('/all-players', 'GET')
+    .then(res => res.json())
+}
+
+export function addNewPlayer(name: string, position: string, imageurl: string): Promise<Response> {
+  return apiRequest('/create-player', 'POST', {
+    name: name,
+    position: position,
+    imageurl: imageurl
+  })
+    .then(res => res.json())
+}
+
+export function getSinglePlayer(id: number): Promise<PlayersProfile> {
+  return apiRequest(`/players/${id}`, 'GET')
+    .then(res => res.json())
+}
+
+export function updateSinglePlayer(id: number, name: string, position: string, imageurl: string): Promise<Response> {
+  return apiRequest(`/players/${id}`, 'PUT', {
+    name: name,
+    position: position,
+    imageurl: imageurl
+  })
+    .then(res => res.json())
+}

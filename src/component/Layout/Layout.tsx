@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { title } from '../../config/constants';
 
-import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import MetaHead from '../MetaHead/MetaHead';
 import {routes} from "../../constants/routes";
@@ -18,7 +17,6 @@ const Layout: FC<LayoutProps> = ({ children }) => {
             <MetaHead title={title}  />
             {location.pathname !== routes.login && <Header/>}
             <div className="bg-contentPage h-hero xxs:p-5 lg:p-0">{children}</div>
-            {location.pathname !== routes.login && <Footer/>}
         </>
     )
 }

@@ -1,43 +1,196 @@
 import {FC} from "react"
-import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
-import {Pie} from 'react-chartjs-2';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from 'recharts'
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+const data = [
+  {
+    playerName: 'Okocha',
+    OnTgt: 4,
+    OffTgt: 9
+  },
+  {
+    playerName: 'Berbatov',
+    OnTgt: 3,
+    OffTgt: 1
+  },
+  {
+    playerName: 'Ronaldos',
+    OnTgt: 2,
+    OffTgt: 7
+  },
+  {
+    playerName: 'Hazard',
+    OnTgt: 3,
+    OffTgt: 3
+  },
+  {
+    playerName: 'Pogba',
+    OnTgt: 4,
+    OffTgt: 1
+  },
+]
 
-export const data = {
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+const data2 = [
+  {
+    playerName: 'Terry',
+    Tkl: 14,
+    Int: 19
+  },
+  {
+    playerName: 'John',
+    Tkl: 31,
+    Int: 11
+  },
+  {
+    playerName: 'Azpi',
+    Tkl: 12,
+    Int: 17
+  },
+  {
+    playerName: 'Alex',
+    Tkl: 13,
+    Int: 30
+  },
+  {
+    playerName: 'Dariot',
+    Tkl: 24,
+    Int: 11
+  },
+]
 
 export const Home: FC = () => {
 
   return (
-    <div>
-      Home
+    <div className='grid grid-cols-2 gap-4 py-4'>
       <div>
-        <Pie data={data}/></div>
+        <div className='text-center mb-4'>Top Scorers</div>
+        <table className="shadow-sm bg-white m-auto">
+          <thead>
+          <tr>
+            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Player</th>
+            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Position</th>
+            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Goals</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td className='border px-8 py-4'>Aribisala</td>
+            <td className='border px-8 py-4'>MF</td>
+            <td className='border px-8 py-4'>2</td>
+          </tr>
+          <tr>
+            <td className='border px-8 py-4'>Witchy Woman</td>
+            <td className='border px-8 py-4'>CB</td>
+            <td className='border px-8 py-4'>3</td>
+          </tr>
+          <tr>
+            <td className='border px-8 py-4'>Shining Star</td>
+            <td className='border px-8 py-4'>F</td>
+            <td className='border px-8 py-4'>5</td>
+          </tr>
+          <tr>
+            <td className='border px-8 py-4'>Ahmed</td>
+            <td className='border px-8 py-4'>F</td>
+            <td className='border px-8 py-4'>9</td>
+          </tr>
+          <tr>
+            <td className='border px-8 py-4'>Christian</td>
+            <td className='border px-8 py-4'>MF</td>
+            <td className='border px-8 py-4'>2</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div className='text-center mb-4'>Top Assist</div>
+        <table className="shadow-sm bg-white m-auto">
+          <thead>
+          <tr>
+            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Player</th>
+            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Position</th>
+            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Assists</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td className='border px-8 py-4'>Gideon</td>
+            <td className='border px-8 py-4'>MF</td>
+            <td className='border px-8 py-4'>5</td>
+          </tr>
+          <tr>
+            <td className='border px-8 py-4'>Ricci</td>
+            <td className='border px-8 py-4'>MF</td>
+            <td className='border px-8 py-4'>3</td>
+          </tr>
+          <tr>
+            <td className='border px-8 py-4'>Star</td>
+            <td className='border px-8 py-4'>F</td>
+            <td className='border px-8 py-4'>2</td>
+          </tr>
+          <tr>
+            <td className='border px-8 py-4'>Ahmed</td>
+            <td className='border px-8 py-4'>F</td>
+            <td className='border px-8 py-4'>2</td>
+          </tr>
+          <tr>
+            <td className='border px-8 py-4'>Christian</td>
+            <td className='border px-8 py-4'>MF</td>
+            <td className='border px-8 py-4'>5</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div className='text-center mb-4'>Top Shot Performers</div>
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="4 4"/>
+          <XAxis dataKey="playerName"/>
+          <YAxis/>
+          <Tooltip/>
+          <Legend/>
+          <Bar dataKey="OnTgt" fill="rgba(241, 164, 29, 1)"/>
+          <Bar dataKey="OffTgt" fill="#040404"/>
+        </BarChart>
+      </div>
+      <div>
+        <div className='text-center mb-4'>Top Defensive Performers</div>
+        <BarChart
+          width={500}
+          height={300}
+          data={data2}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="4 4"/>
+          <XAxis dataKey="playerName"/>
+          <YAxis/>
+          <Tooltip/>
+          <Legend/>
+          <Bar dataKey="Tkl" fill="rgba(241, 164, 29, 1)"/>
+          <Bar dataKey="Int" fill="#040404"/>
+        </BarChart>
+      </div>
     </div>
   )
 }

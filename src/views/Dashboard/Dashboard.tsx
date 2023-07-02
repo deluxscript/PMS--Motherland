@@ -1,5 +1,7 @@
 import {FC, useState} from "react"
 
+import {AppController} from "../../hooks/useAppController"
+
 import {SidebarMenu} from "../../component/Sidebar/SidebarMenu"
 import {MainContent} from "../../component/MainContent/MainContent"
 import {Home} from "../../component/Home/Home"
@@ -15,9 +17,20 @@ import schedule from '../../images/icons/schedule.png'
 import training from '../../images/icons/training.png'
 
 import './Dashboard.css'
+import {AddPlayer} from "../AddPlayer/AddPlayer";
+import {EditPlayer} from "../EditPlayer/EditPlayer";
 
+type DashboardProps = {
+  controller: AppController
+}
 
-export const Dashboard: FC = () => {
+type EditPageProps = {
+  status: boolean
+  playerId: number | undefined
+}
+
+export const Dashboard: FC<DashboardProps> = ({controller}) => {
+  const {players} = controller.players
   const sideBarTabs = [
     {
       tabName: 'Home',
@@ -45,7 +58,16 @@ export const Dashboard: FC = () => {
       image: schedule
     }
   ]
+
   const [activeTab, setActiveTab] = useState('HOME')
+  const [addPage, setAddPage] = useState(false)
+  const [editPage, setEditPage] = useState<EditPageProps>({status: false, playerId: undefined})
+
+  const handleEditPage = (status: boolean, playerId: number) => {
+    if (playerId) {
+      setEditPage({status, playerId})
+    }
+  }
 
   return (
     <div className="flex">
@@ -66,7 +88,17 @@ export const Dashboard: FC = () => {
           <MainContent key={item.tabType} selected={activeTab === item.tabType}>
             <div>
               {activeTab === 'HOME' ? <Home /> : null}
-              {activeTab === 'PLAYERS' ? <Players /> : null}
+              {activeTab === 'PLAYERS' && !addPage && !editPage.status ?
+                <Players
+                  players={players}
+                  onClickAddPage={() => setAddPage(true)}
+                  onClickEditPage={handleEditPage}
+                />
+                  : null}
+              {activeTab === 'PLAYERS' && addPage && !editPage.status ?
+                <AddPlayer addPage editPage={editPage.status}/> : null}
+              {activeTab === 'PLAYERS' && !addPage && editPage.status ?
+                <EditPlayer playerId={editPage.playerId}/> : null}
               {activeTab === 'MATCH' ? <MatchPerformance /> : null}
               {activeTab === 'TRAINING' ? <TrainingPerformance/> : null}
               {activeTab === 'SCHEDULE' ? <SchedulePage/> : null}
