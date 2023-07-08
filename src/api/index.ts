@@ -64,6 +64,18 @@ export function loginAuthentication(data: AuthenticationData): Promise<Authentic
   return apiRequest('/login', 'POST', data)
     .then(res => res.json())
 }
+
+export type MatchStatType = {
+  timestamp: string
+  type: string
+  name: string
+  stage: string
+  homeTeamName: string
+  homeTeamScores: number
+  awayTeamName: string
+  awayTeamScores: number
+}
+
 export type PlayersProfile = {
   id: number
   name: string

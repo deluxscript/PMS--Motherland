@@ -15,7 +15,6 @@ const Layout: FC<LayoutProps> = ({ children }) => {
     return (
         <>
             <MetaHead title={title}  />
-            {location.pathname !== routes.login && <Header/>}
             <div className="bg-contentPage h-hero xxs:p-5 lg:p-0">{children}</div>
         </>
     )

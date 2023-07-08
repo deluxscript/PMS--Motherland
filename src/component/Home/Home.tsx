@@ -1,195 +1,82 @@
-import {FC} from "react"
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from 'recharts'
+import {FC, useEffect, useState} from "react"
 
-const data = [
-  {
-    playerName: 'Okocha',
-    OnTgt: 4,
-    OffTgt: 9
-  },
-  {
-    playerName: 'Berbatov',
-    OnTgt: 3,
-    OffTgt: 1
-  },
-  {
-    playerName: 'Ronaldos',
-    OnTgt: 2,
-    OffTgt: 7
-  },
-  {
-    playerName: 'Hazard',
-    OnTgt: 3,
-    OffTgt: 3
-  },
-  {
-    playerName: 'Pogba',
-    OnTgt: 4,
-    OffTgt: 1
-  },
-]
-
-const data2 = [
-  {
-    playerName: 'Terry',
-    Tkl: 14,
-    Int: 19
-  },
-  {
-    playerName: 'John',
-    Tkl: 31,
-    Int: 11
-  },
-  {
-    playerName: 'Azpi',
-    Tkl: 12,
-    Int: 17
-  },
-  {
-    playerName: 'Alex',
-    Tkl: 13,
-    Int: 30
-  },
-  {
-    playerName: 'Dariot',
-    Tkl: 24,
-    Int: 11
-  },
-]
+import {DropdownButton} from "../DropdownButton/DropdownButton"
+import {useSelector} from "react-redux";
+import { settingsSelector} from "../../store/slices/SettingsSlice";
+import {MonthSchedule} from "../MonthSchedule/MonthSchedule";
+import {MatchBox} from "../MatchBox/MatchBox";
+import {matchData, months} from "../../config/constants";
 
 export const Home: FC = () => {
 
+  const [dropDownMode, setDropDownMode] = useState('')
+  const [dropDownCompetition, setDropDownCompetition] = useState('')
+
+  const {mode, competition} = useSelector(settingsSelector)
+
+  const currentDate = new Date()
+  const currentMonth = currentDate.getMonth()
+  const currentYear = currentDate.getFullYear()
+
+  const startYear = 2023
+  const startMonth = 5 // June is month 5 (0-based index)
+  const stats = []
+
+  const isStatsEmpty = stats.length === 0
+
+  const pastMonths = [];
+  for (let year = currentYear; year >= startYear; year--) {
+    const endMonth = (year === currentYear) ? currentMonth : 11
+    const beginMonth = (year === startYear) ? startMonth : 11
+
+    for (let month = endMonth; month >= beginMonth; month--) {
+      pastMonths.push({month, year});
+    }
+  }
+
+  useEffect(() => {
+    mode && setDropDownMode(mode.mode)
+    competition && setDropDownCompetition(competition.competition)
+  }, [mode, competition])
+
   return (
-    <div className='grid grid-cols-2 gap-4 py-4'>
-      <div>
-        <div className='text-center mb-4'>Top Scorers</div>
-        <table className="shadow-sm bg-white m-auto">
-          <thead>
-          <tr>
-            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Player</th>
-            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Position</th>
-            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Goals</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td className='border px-8 py-4'>Aribisala</td>
-            <td className='border px-8 py-4'>MF</td>
-            <td className='border px-8 py-4'>2</td>
-          </tr>
-          <tr>
-            <td className='border px-8 py-4'>Witchy Woman</td>
-            <td className='border px-8 py-4'>CB</td>
-            <td className='border px-8 py-4'>3</td>
-          </tr>
-          <tr>
-            <td className='border px-8 py-4'>Shining Star</td>
-            <td className='border px-8 py-4'>F</td>
-            <td className='border px-8 py-4'>5</td>
-          </tr>
-          <tr>
-            <td className='border px-8 py-4'>Ahmed</td>
-            <td className='border px-8 py-4'>F</td>
-            <td className='border px-8 py-4'>9</td>
-          </tr>
-          <tr>
-            <td className='border px-8 py-4'>Christian</td>
-            <td className='border px-8 py-4'>MF</td>
-            <td className='border px-8 py-4'>2</td>
-          </tr>
-          </tbody>
-        </table>
+    <div className=''>
+      <div className='border-b py-2'>
+        <div className='flex justify-between'>
+          <div className='flex'>
+            <DropdownButton options={['Matches & Training', 'Match', 'Training']} instanceId='mode' classNames='mr-4'/>
+            <DropdownButton options={['All Competitions', 'Friendly Match', 'League Match', 'Cup Match']}
+                            instanceId='competition' disabled={mode && mode.mode === 'Training'} classNames='mr-4'/>
+          </div>
+          <div>
+            <DropdownButton options={['Training', 'vs. Match']} title='Add Data' instanceId='dataStatus' addAction />
+          </div>
+        </div>
       </div>
       <div>
-        <div className='text-center mb-4'>Top Assist</div>
-        <table className="shadow-sm bg-white m-auto">
-          <thead>
-          <tr>
-            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Player</th>
-            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Position</th>
-            <th className='bg-blackColor border text-left px-8 py-4 text-white'>Assists</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td className='border px-8 py-4'>Gideon</td>
-            <td className='border px-8 py-4'>MF</td>
-            <td className='border px-8 py-4'>5</td>
-          </tr>
-          <tr>
-            <td className='border px-8 py-4'>Ricci</td>
-            <td className='border px-8 py-4'>MF</td>
-            <td className='border px-8 py-4'>3</td>
-          </tr>
-          <tr>
-            <td className='border px-8 py-4'>Star</td>
-            <td className='border px-8 py-4'>F</td>
-            <td className='border px-8 py-4'>2</td>
-          </tr>
-          <tr>
-            <td className='border px-8 py-4'>Ahmed</td>
-            <td className='border px-8 py-4'>F</td>
-            <td className='border px-8 py-4'>2</td>
-          </tr>
-          <tr>
-            <td className='border px-8 py-4'>Christian</td>
-            <td className='border px-8 py-4'>MF</td>
-            <td className='border px-8 py-4'>5</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <div className='text-center mb-4'>Top Shot Performers</div>
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="4 4"/>
-          <XAxis dataKey="playerName"/>
-          <YAxis/>
-          <Tooltip/>
-          <Legend/>
-          <Bar dataKey="OnTgt" fill="rgba(241, 164, 29, 1)"/>
-          <Bar dataKey="OffTgt" fill="#040404"/>
-        </BarChart>
-      </div>
-      <div>
-        <div className='text-center mb-4'>Top Defensive Performers</div>
-        <BarChart
-          width={500}
-          height={300}
-          data={data2}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="4 4"/>
-          <XAxis dataKey="playerName"/>
-          <YAxis/>
-          <Tooltip/>
-          <Legend/>
-          <Bar dataKey="Tkl" fill="rgba(241, 164, 29, 1)"/>
-          <Bar dataKey="Int" fill="#040404"/>
-        </BarChart>
+        {pastMonths.map(({month, year}) => {
+          const filteredData = matchData.filter(item => {
+            const [itemDay, itemMonth, itemYear] = item.timestamp.split("-")
+            const itemMonthName = months[parseInt(itemMonth) - 1]
+
+            if (dropDownMode === "Match") {
+              return itemMonthName === months[month] && itemYear === year.toString() && item.type === "Match"
+            } else if (dropDownMode === "Training") {
+              return itemMonthName === months[month] && itemYear === year.toString() && item.type === "Training"
+            } else {
+              return itemMonthName === months[month] && itemYear === year.toString()
+            }
+          })
+
+          return (
+            <MonthSchedule
+              key={`${month}-${year}`}
+              title={`${months[month]} ${year}`}
+            >
+              {filteredData.map(data => (<MatchBox key={data.timestamp} info={data}/>))}
+            </MonthSchedule>
+          )
+        })}
       </div>
     </div>
   )

@@ -5,8 +5,7 @@ import {
   getSinglePlayerThunk,
   playersSelector,
   updateSinglePlayerThunk
-} from "../../store/slices/PlayersSlice";
-import {updateSinglePlayer} from "../../api";
+} from "../../store/slices/PlayersSlice"
 
 type EditPlayerProps = {
   playerId: number | undefined
