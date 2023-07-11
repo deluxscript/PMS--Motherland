@@ -40,7 +40,7 @@ export const Popup: FC<PopupProps> = ({onClose, children,
     <div className='popup fixed top-0 left-0 w-screen h-screen flex items-center justify-center p-4 z-10'>
       <button type='button' onClick={onDocumentClose}
         disabled={isCloseFunctionDisabled}
-        className={classnames('absolute backdrop-blur-lg top-0 left-0 w-full h-full border-0 z-0',
+        className={classnames('bg-blackColor opacity-80 absolute backdrop-blur-lg top-0 left-0 w-full h-full border-0 z-0',
           {'cursor-default': isCloseFunctionDisabled})} />
       <div className='popup-container relative max-w-sm overflow-auto bg-white shadow-md rounded-xl max-h-popup z-2'>
         {children}

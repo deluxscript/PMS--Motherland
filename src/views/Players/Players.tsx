@@ -5,7 +5,6 @@ import {PlayersProfile} from "../../api"
 import {Table} from "../../component/Table/Table"
 import {EditPlayerPopupPortal} from "./EditPlayerPopup/EditPlayerPopup"
 import {AddPlayerPopupPortal} from "./AddPlayerPopup/AddPlayerPopup"
-import {Link} from "react-router-dom";
 
 type PlayersProp = {
   players: PlayersProfile[] | undefined

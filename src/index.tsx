@@ -1,10 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom/client'
 import {Provider} from 'react-redux'
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import {setupStore} from './store';
+import { extendTheme, ChakraProvider } from '@chakra-ui/react'
+import './index.css'
+import App from './App'
+import reportWebVitals from './reportWebVitals'
+import {setupStore} from './store'
+
+const colors = {
+  brand: {
+    yellowColor: 'rgba(241, 164, 29, 1)'
+  },
+}
+
+const theme = extendTheme({colors})
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,10 +21,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={setupStore()}>
-      <App/>
+      <ChakraProvider theme={theme}>
+        <App/>
+      </ChakraProvider>
     </Provider>
   </React.StrictMode>
-);
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

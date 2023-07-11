@@ -71,9 +71,110 @@ export type MatchStatType = {
   name: string
   stage: string
   homeTeamName: string
-  homeTeamScores: number
+  homeScore: number
   awayTeamName: string
-  awayTeamScores: number
+  awayScore: number
+}
+
+export type OffensiveStatsType = {
+  goals: number
+  assists: number
+  shotsOnTarget: number
+  blockedShots: number
+  shotsOffTarget: number
+  shotsInsidePenaltyArea: number
+  shotsOutsidePenaltyArea: number
+  offsides: number
+  freeKicks: number
+  corners: number
+  throwIns: number
+  takeOnsSuccess: number
+  takeOnsTotal: number
+}
+
+export type DistributionStatsType = {
+  successfulPasses: number
+  totalPasses: number
+  passAccuracy: number
+  keyPasses: number
+  totalPassesInFinalThird: number
+  successfulPassesInFinalThird: number
+  totalPassesInMiddleThird: number
+  successfulPassesInMiddleThird: number
+  totalPassesInDefenciveThird: number
+  successfulPassesInDefenciveThird: number
+  totalLongPasses: number
+  successfulLongPasses: number
+  totalMediumPasses: number
+  successfulMediumPasses: number
+  totalShortPasses: number
+  successfulShortPasses: number
+  totalForwardPasses: number
+  successfulForwardPasses: number
+  totalSidewaysPasses: number
+  successfulSidewaysPasses: number
+  totalBackwardPasses: number
+  successfulBackwardPasses: number
+  totalCrosses: number
+  successfulCrosses: number
+  totalControlUnderPressure: number
+  successfulControlUnderPressure: number
+}
+
+export type DefensiveStatsType = {
+  totalTackles: number
+  successfulTackles: number
+  totalAerialDuels: number
+  successfulAerialDuels: number
+  totalGroundDuels: number
+  successfulGroundDuels: number
+  interceptions: number
+  clearances: number
+  recoveries: number
+  blocks: number
+  mistakes: number
+  fouls: number
+  wonFouls: number
+  yellowCards: number
+  redCards: number
+}
+
+export type GoalKeeperStatsType = {
+  goalsConceded: number
+  catches: number
+  parries: number
+  totalGoalKicks: number
+  successfulGoalKicks: number
+  totalAerialClearance: number
+  successfulAerialClearance: number
+}
+
+export type PhysicalDataType = {
+  totalDistanceCovered: number
+  averageSpeed: number
+  maximumSpeed: number
+}
+
+export type Stats = {
+  [playerId: number]: {
+    offensiveStats: OffensiveStatsType
+    distributionStats: DistributionStatsType
+    defensiveStats: DefensiveStatsType
+    goalKeeperStats: GoalKeeperStatsType
+    physicalData: PhysicalDataType
+  }
+}
+
+export type matchDataType = {
+  timestamp: string
+  homeTeam: string
+  homeScore: number
+  awayTeam: string
+  awayScore: number
+  type: string
+  stage: string
+  publish: boolean
+  stats: Stats
 }
 
 export type PlayersProfile = {
@@ -109,4 +210,82 @@ export function updateSinglePlayer(id: number, name: string, position: string, i
     imageurl: imageurl
   })
     .then(res => res.json())
+}
+
+export function saveMatchPerformance(data: matchDataType): Promise<Response> {
+  return apiRequest('/save-match-data', 'POST', data)
+    .then(res => res.json())
+}
+
+export type PlayerStats = {
+  playerId: number
+  offensiveStats: OffensiveStatsType
+  distributionStats: DistributionStatsType
+  defensiveStats: DefensiveStatsType
+  goalkeeperStats: GoalKeeperStatsType
+  physicalData: PhysicalDataType
+}
+
+export type MatchPerformance = {
+  matchId: number
+  timeStamp: string
+  homeTeam: string
+  homeScore: number
+  awayTeam: string
+  awayScore: number
+  type: string
+  stage: string
+  publish: boolean
+  playerStats: PlayerStats[]
+}
+
+export type MatchPerformanceData = {
+  [matchId: string]: MatchPerformance
+}
+
+export function getSingleMatchPerformance(id: number): Promise<MatchPerformanceData> {
+  return apiRequest(`/match/${id}/match-performances`, 'GET')
+    .then(res => res.json())
+}
+
+export type allMatchesResponse = {
+  id: number
+  timestamp: string
+  hometeam: string
+  homescore: number
+  awayteam: string
+  awayscore: number
+  type: string
+  stage: string
+  publish: boolean
+}
+
+export type allMatches = {
+  matchId: number
+  timeStamp: string
+  homeTeam: string
+  homeScore: number
+  awayTeam: string
+  awayScore: number
+  type: string
+  stage: string
+  publish: boolean
+}
+
+export function getAllMatches(): Promise<allMatches[]> {
+  return apiRequest(`/match/match-performances`, 'GET')
+    .then(res => res.json())
+    .then((data:allMatchesResponse[]) => {
+      return data.map(item => ({
+        matchId: item.id,
+        timeStamp: item.timestamp,
+        homeTeam: item.hometeam,
+        homeScore: item.homescore,
+        awayTeam: item.awayteam,
+        awayScore: item.awayscore,
+        type: item.type,
+        stage: item.stage,
+        publish: item.publish
+      }))
+    })
 }

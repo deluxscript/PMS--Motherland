@@ -1,13 +1,20 @@
 import {FC, useEffect, useState} from "react"
 
-import {DropdownButton} from "../DropdownButton/DropdownButton"
+import {ActionDropdownButton, DropdownButton} from "../DropdownButton/DropdownButton"
 import {useSelector} from "react-redux";
-import { settingsSelector} from "../../store/slices/SettingsSlice";
-import {MonthSchedule} from "../MonthSchedule/MonthSchedule";
+import { settingsSelector} from "../../store/slices/SettingsSlice"
+import {MonthSchedule} from "../MonthSchedule/MonthSchedule"
 import {MatchBox} from "../MatchBox/MatchBox";
-import {matchData, months} from "../../config/constants";
+import {matchData, months} from "../../config/constants"
+import {allMatches, MatchPerformance} from "../../api"
 
-export const Home: FC = () => {
+import {useForm} from "@createform/react"
+
+type HomeProps = {
+  allMatches: allMatches[]
+}
+
+export const Home: FC<HomeProps> = ({allMatches}) => {
 
   const [dropDownMode, setDropDownMode] = useState('')
   const [dropDownCompetition, setDropDownCompetition] = useState('')
@@ -23,6 +30,7 @@ export const Home: FC = () => {
   const stats = []
 
   const isStatsEmpty = stats.length === 0
+  console.log('aaa', allMatches)
 
   const pastMonths = [];
   for (let year = currentYear; year >= startYear; year--) {
@@ -49,14 +57,14 @@ export const Home: FC = () => {
                             instanceId='competition' disabled={mode && mode.mode === 'Training'} classNames='mr-4'/>
           </div>
           <div>
-            <DropdownButton options={['Training', 'vs. Match']} title='Add Data' instanceId='dataStatus' addAction />
+            <ActionDropdownButton options={['Training', 'vs. Match']} title='Add Data' />
           </div>
         </div>
       </div>
       <div>
         {pastMonths.map(({month, year}) => {
-          const filteredData = matchData.filter(item => {
-            const [itemDay, itemMonth, itemYear] = item.timestamp.split("-")
+          const filteredData = allMatches.filter(item => {
+            const [itemDay, itemMonth, itemYear] = item.timeStamp.split("-")
             const itemMonthName = months[parseInt(itemMonth) - 1]
 
             if (dropDownMode === "Match") {
@@ -73,7 +81,7 @@ export const Home: FC = () => {
               key={`${month}-${year}`}
               title={`${months[month]} ${year}`}
             >
-              {filteredData.map(data => (<MatchBox key={data.timestamp} info={data}/>))}
+              {filteredData.map(data => (<MatchBox key={data.timeStamp} info={data}/>))}
             </MonthSchedule>
           )
         })}

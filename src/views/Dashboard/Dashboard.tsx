@@ -17,9 +17,11 @@ import training from '../../images/icons/training.png'
 import motherlandLogo from "../../images/home/logo.png"
 
 import './Dashboard.css'
+import {allMatches, MatchPerformanceData, PlayersProfile} from "../../api";
 
 type DashboardProps = {
-  controller: AppController
+  players: PlayersProfile[] | undefined
+  allMatches: allMatches[]
 }
 
 const sideBarTabs = [
@@ -45,8 +47,7 @@ const sideBarTabs = [
   }
 ]
 
-export const Dashboard: FC<DashboardProps> = ({controller}) => {
-  const { players } = controller.players
+export const Dashboard: FC<DashboardProps> = ({players, allMatches}) => {
 
   const [activeTab, setActiveTab] = useState('HOME')
 
@@ -72,7 +73,7 @@ export const Dashboard: FC<DashboardProps> = ({controller}) => {
         sideBarTabs.map(item =>
           <MainContent key={item.tabType} selected={activeTab === item.tabType}>
             <div>
-              {activeTab === 'HOME' ? <Home /> : null}
+              {activeTab === 'HOME' ? <Home allMatches={allMatches} /> : null}
               {activeTab === 'PLAYERS' ? <Players players={players} /> : null}
               {activeTab === 'DATA' ? <MatchPerformance /> : null}
               {activeTab === 'TRAINING' ? <TrainingPerformance/> : null}

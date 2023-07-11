@@ -13,7 +13,8 @@ export const AppRoutes: FC = () => {
         <Layout>
           <Routes>
             <Route path={routes.login} element={<Login/>} />
-            <Route path={routes.dashboard} element={<Dashboard controller={controller}/>}/>
+            <Route path={routes.dashboard} element={<Dashboard players={controller.players.players}
+              allMatches={controller.allMatches.allMatches}/>}/>
           </Routes>
         </Layout>
       </>
