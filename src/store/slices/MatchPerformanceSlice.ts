@@ -5,9 +5,8 @@ import {
   allMatches,
   getAllMatches,
   getSingleMatchPerformance,
-  matchDataType,
   MatchPerformanceData,
-  saveMatchPerformance
+  saveMatchPerformance, updateMatchPerformance
 } from "../../api"
 
 type InitialMatchPerformanceState = {
@@ -15,6 +14,10 @@ type InitialMatchPerformanceState = {
    * The loading state of creating match stat data
    */
   loadingMatchStatsData: AsyncThunkLoading
+  /**
+   * The loading state of updating match stat data
+   */
+  loadingMatchStatsDataUpdate: AsyncThunkLoading
   /**
    * The current selected match
    */
@@ -35,6 +38,7 @@ type InitialMatchPerformanceState = {
 
 const initialState: InitialMatchPerformanceState = {
   loadingMatchStatsData: 'idle',
+  loadingMatchStatsDataUpdate: 'idle',
   currentMatch: {},
   loadingCurrentMatch: 'idle',
   allMatches: [],
@@ -46,7 +50,7 @@ const initialState: InitialMatchPerformanceState = {
  */
 export const saveMatchPerformanceThunk = createAsyncThunk<
   unknown,
-  { data: matchDataType }
+  { data: any }
 >('stats/match-performance', ({data}) => {
   return saveMatchPerformance(data)
 })
@@ -62,6 +66,16 @@ export const getSingleMatchPerformanceThunk = createAsyncThunk<
 })
 
 /**
+ * Update Single Match Data
+ */
+export const updateMatchPerformanceThunk = createAsyncThunk<
+  unknown,
+  { id: number, data: any }
+>('stats/update-match-performance', ({id, data}) => {
+  return updateMatchPerformance(id, data)
+})
+
+/**
  * Get all matches
  */
 export const getAllMatchesThunk = createAsyncThunk<
@@ -73,7 +87,13 @@ export const getAllMatchesThunk = createAsyncThunk<
 export const matchStatsDataSlice = createSlice({
   name: 'matchPerformanceData',
   initialState,
-  reducers: {},
+  reducers: {
+    resetCurrentMatch: (
+      state
+    ) => {
+      state.currentMatch = {}
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(saveMatchPerformanceThunk.pending, state => {
@@ -136,8 +156,28 @@ export const matchStatsDataSlice = createSlice({
           console.error('Error getting all matches', action.error)
         }
       })
+      .addCase(updateMatchPerformanceThunk.pending, state => {
+        state.loadingMatchStatsDataUpdate = 'pending'
+      })
+      .addCase(updateMatchPerformanceThunk.fulfilled, state => {
+        if (
+          state.loadingMatchStatsDataUpdate === 'pending'
+        ) {
+          state.loadingMatchStatsDataUpdate = 'succeeded'
+        }
+      })
+      .addCase(updateMatchPerformanceThunk.rejected, (state, action) => {
+        if (
+          state.loadingMatchStatsDataUpdate === 'pending'
+        ) {
+          state.loadingMatchStatsDataUpdate = 'failed'
+          console.error('Error updating match stat data', action.error)
+        }
+      })
   }
 })
+
+export const { resetCurrentMatch } = matchStatsDataSlice.actions
 
 export const matchStatsDataSelector = (state: RootState) => state.matchStatsData
 

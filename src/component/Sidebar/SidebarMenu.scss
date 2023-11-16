@@ -1,0 +1,60 @@
+@use '../../assets/styles/colors';
+
+.Sidebar {
+  &__menu {
+    border-top: 1px solid colors.$color-flat-grey1;
+
+    &-tab-button {
+      display: flex;
+      width: 100%;
+      min-height: 64px;
+      font-size: 14px;
+      font-weight: 500;
+      align-items: center;
+      padding: 12px;
+
+      &--active {
+        cursor: default;
+        background: colors.$color-background;
+        border-right: 3px solid colors.$color-yellow;
+      }
+
+      &-media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        margin-right: 12px;
+        background-color: colors.$color-background1;
+        max-width: 34px;
+        min-width: 34px;
+        height: 34px;
+
+        &--active {
+          background-color: colors.$color-yellow;
+        }
+      }
+
+      &-title {
+        display: flex;
+        align-items: flex-start;
+        padding-top: 2px;
+        flex: 1 1;
+        flex-direction: column;
+
+        &--text {
+          font-weight: 600;
+          line-height: 1.1;
+          font-size: 15px;
+        }
+
+        &--sub-text {
+          padding-top: 2px;
+          line-height: 1.2;
+          font-size: 13px;
+          color: colors.$color-sub-text;
+        }
+      }
+    }
+  }
+}

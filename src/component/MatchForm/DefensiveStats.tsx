@@ -1,6 +1,5 @@
 import {FC} from "react"
-import {Button, NumberInput, NumberInputField, Stack} from '@chakra-ui/react'
-import {useWizard} from 'react-use-wizard'
+import {Stack} from '@chakra-ui/react'
 import {
   Table,
   Thead,
@@ -12,57 +11,67 @@ import {
   TableContainer,
 } from '@chakra-ui/react'
 
-import {useMatch} from "../../hooks/useMatch"
 import {PlayersProfile} from "../../api"
 import { DefensiveStatsItems } from "../../config/constants"
 
 import './Form.css'
+import {Field} from "formik";
 
 type DefensiveStatsProps = {
   players: PlayersProfile[] | undefined
 }
 export const DefensiveStats: FC<DefensiveStatsProps> = ({players}) => {
 
-  const {previousStep, nextStep} = useWizard()
-  const {register} = useMatch()
-
-  return <>
-    <div className='text-md font-bold text-center uppercase pb-3'>Defensive Stats</div>
-    <TableContainer>
-      <Table variant='simple' size='sm'>
-        <Thead>
-          <Tr>
-            <Th>Players</Th>
-            <Th>Data</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {players && players.map(player => <Tr key={player.id}>
-            <Td position='sticky' left={0} zIndex={1} backgroundColor='#040404'
-                color='#a0a0a0'>{player.name}</Td>
-            <Td>
-              <Stack direction='row' spacing={2}>
-                {DefensiveStatsItems.map(item =>
-                  <NumberInput key={item.name}>
-                    <NumberInputField placeholder={item.placeholder}
-                      minWidth={150} {...register(`stats.${[player.id]}.distributionStats.${item.name}`)}/>
-                  </NumberInput>)}
-              </Stack>
-            </Td>
-          </Tr>)}
-        </Tbody>
-        <Tfoot>
-          <Tr>
-            <Th>Players</Th>
-            <Th>Data</Th>
-          </Tr>
-        </Tfoot>
-      </Table>
+  return (
+    <>
+      <TableContainer>
+        <Table variant='simple' size='sm'>
+          <Thead>
+            <Tr>
+              <Th>Players</Th>
+              <Th>
+                <Stack direction='row' spacing={2}>
+                  {DefensiveStatsItems.map(item =>
+                    <div key={item.placeholder} className='min-w-150 w-190 px-2 text-small border-r py-2 text-center'>{item.placeholder}</div>)
+                  }
+                </Stack>
+              </Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {players && players.map(player => <Tr key={player.id}>
+              <Td position='sticky' left={0} zIndex={1} backgroundColor='#040404'
+                  color='#a0a0a0'>{player.name}</Td>
+              <Td>
+                <Stack direction='row' spacing={2}>
+                  {DefensiveStatsItems.map(item =>
+                    <Field
+                      key={item.name}
+                      name={`stats[${player.id}].defensiveStats.${item.name}`}
+                      placeholder={item.placeholder}
+                      type='number'
+                      title={item.placeholder}
+                      className='min-w-150 h-10 px-4 border rounded outline-0'
+                    />)}
+                </Stack>
+              </Td>
+            </Tr>)}
+          </Tbody>
+          <Tfoot>
+            <Tr>
+              <Th>Players</Th>
+              <Th>
+                <Stack direction='row' spacing={2}>
+                  {DefensiveStatsItems.map(item =>
+                    <div key={item.placeholder}
+                         className='min-w-150 w-190 px-2 text-small border-r py-2 text-center'>{item.placeholder}</div>)
+                  }
+                </Stack>
+              </Th>
+            </Tr>
+          </Tfoot>
+        </Table>
     </TableContainer>
-    <Stack direction="row" spacing={4} mt={10}>
-      <Button type="submit">Save</Button>
-      <Button onClick={previousStep}>Previous</Button>
-      <Button onClick={nextStep}>Next</Button>
-    </Stack>
-  </>
+    </>
+  )
 }

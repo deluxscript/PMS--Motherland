@@ -1,14 +1,16 @@
-import { BrowserRouter } from 'react-router-dom'
-import { AppRoutes } from './AppRoutes'
+import {BrowserRouter} from 'react-router-dom'
 
-import './App.css'
+import Layout from "./component/Layout/Layout"
+import { DashboardLayout } from "./component/DashboardLayout/DashboardLayout"
+
+import './App.scss'
 
 export const App = () => {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <Layout>
+        <DashboardLayout />
+      </Layout>
     </BrowserRouter>
   )
 }
-
-export default App

@@ -1,0 +1,18 @@
+@font-face {
+  font-family: DIN Next TR Regular;
+  src: url('../fonts/DINNextLTPro-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: DIN Next TR Medium;
+  src: url('../fonts/DINNextLTPro-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: DIN Next TR Bold;
+  src: url('../fonts/DINNextLTPro-Bold.woff') format('woff');
+}
+
+$font-regular: DIN Next TR Regular, -apple-system, system-ui, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+$font-medium: DIN Next TR Medium, -apple-system, system-ui, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+$font-bold: DIN Next TR Bold, -apple-system, system-ui, BlinkMacSystemFont, Helvetica, Arial, sans-serif;

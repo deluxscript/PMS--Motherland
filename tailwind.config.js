@@ -6,7 +6,11 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        450: '450px'
+        450: '450px',
+        190: '190px'
+      },
+      fontSize: {
+        small: '9px'
       },
       colors: {
         blackColor: '#040404',
@@ -28,6 +32,11 @@ module.exports = {
       },
       minWidth: {
         100: '100px',
+        150: '150px',
+        190: '190px'
+      },
+      maxWidth: {
+        190: '190px'
       },
       borderRadius: {
         circle: '50%'

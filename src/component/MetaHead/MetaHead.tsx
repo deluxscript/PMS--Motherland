@@ -1,17 +1,20 @@
-import { Helmet } from "react-helmet";
+import {FC} from "react"
+import {Helmet, HelmetProvider} from 'react-helmet-async'
 
-import Favicon from '../../images/favicon.png'
+import Favicon from '../../assets/images/favicon.png'
 
 type HTMLHeadProps = {
   title: string;
 }
 
-const MetaHead: React.FC<HTMLHeadProps> = ({ title}) => {
+const MetaHead: FC<HTMLHeadProps> = ({ title}) => {
   return (
-    <Helmet>
-      <title>{title}</title>
-      <link rel="shortcut icon" href={Favicon} />
-    </Helmet>
+    <HelmetProvider>
+      <Helmet>
+        <title>{title}</title>
+        <link rel="shortcut icon" href={Favicon} />
+      </Helmet>
+    </HelmetProvider>
   );
 };
 

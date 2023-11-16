@@ -1,28 +1,46 @@
-import React, {FC, useEffect} from "react"
-import classnames from "classnames"
+import React, { FC, useEffect } from 'react'
+import cl from 'classnames'
 
-import closeBtn from "../../images/icons/close.png"
+import './Popup.scss'
 
 type PopupProps = {
+  /**
+   * Function which is called on click overlay.
+   */
   onClose: () => void
+  /**
+   * The content to be displayed inside the button.
+   */
   children?: React.ReactNode
+  /**
+   * Classname which is used in popup wrapper.
+   */
   className?: string
-  closeBtnEnabled?: boolean
+  /**
+   * Blocks the click by overlay of the popup for the closing
+   */
   isCloseFunctionDisabled?: boolean
 }
 
-export const Popup: FC<PopupProps> = ({onClose, children,
-  className, closeBtnEnabled,
-  isCloseFunctionDisabled}) => {
+export const Popup: FC<PopupProps> = props => {
 
+  /**
+   * Handles the 'keydown' event, typically for closing a popup on the 'Escape' key press.
+   * @param event - The keyboard event object.
+   */
   const onKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape' && !isCloseFunctionDisabled) {
-      onClose()
+    if (event.key === 'Escape' && !props.isCloseFunctionDisabled) {
+      props.onClose()
     }
   }
+
+  /**
+   * Handles the click event on the document or overlay,
+   * usually for closing the popup.
+   */
   const onDocumentClose = () => {
-    if (!isCloseFunctionDisabled) {
-      onClose()
+    if (!props.isCloseFunctionDisabled) {
+      props.onClose()
     }
   }
 
@@ -37,18 +55,13 @@ export const Popup: FC<PopupProps> = ({onClose, children,
   }, [])
 
   return (
-    <div className='popup fixed top-0 left-0 w-screen h-screen flex items-center justify-center p-4 z-10'>
+    <div className={cl('popup', props.className)}>
       <button type='button' onClick={onDocumentClose}
-        disabled={isCloseFunctionDisabled}
-        className={classnames('bg-blackColor opacity-80 absolute backdrop-blur-lg top-0 left-0 w-full h-full border-0 z-0',
-          {'cursor-default': isCloseFunctionDisabled})} />
-      <div className='popup-container relative max-w-sm overflow-auto bg-white shadow-md rounded-xl max-h-popup z-2'>
-        {children}
-        {closeBtnEnabled &&
-          <button type='button' onClick={onClose} className='absolute top-2.5 right-2.5 w-5 border-0 bg-transparent'>
-            <img src={closeBtn} />
-          </button>
-        }
+        disabled={props.isCloseFunctionDisabled}
+        className={cl('popup__overlay',
+          { 'popup__overlay--disabled': props.isCloseFunctionDisabled })} />
+      <div className='popup__container'>
+        {props.children}
       </div>
     </div>
   )

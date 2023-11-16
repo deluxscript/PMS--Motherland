@@ -1,18 +1,26 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import {allMatches} from "../../api"
 
-import League from "../../images/icons/league.png"
-import Friendly from "../../images/icons/friendly.png"
-import Cup from "../../images/icons/cup.png"
-import CheckMark from "../../images/icons/check.png"
+import League from "../../assets/images/icons/league.png"
+import Friendly from "../../assets/images/icons/friendly.png"
+import Cup from "../../assets/images/icons/cup.png"
+import CheckMark from "../../assets/images/icons/check.png"
+import {EditMatchPopupPortal} from "../EditMatchPopup/EditMatchPopup";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../store/types";
+import {resetCurrentMatch} from "../../store/slices/MatchPerformanceSlice";
 
 type MatchBoxProps = {
   info: allMatches
 }
 export const MatchBox: FC<MatchBoxProps> = ({info}) => {
 
-  const onClickEdit = (matchId: number) => {
-    console.log({matchId})
+  const dispatch = useDispatch<AppDispatch>()
+  const [isActiveEditMatchPopup, setIsActiveEditMatchPopup] = useState(false)
+  const openEditMatchPopup = () => setIsActiveEditMatchPopup(true)
+  const closeEditMatchPopup = async () => {
+    await dispatch(resetCurrentMatch())
+    setIsActiveEditMatchPopup(false)
   }
 
   const getLogoIcon = (name: string) => {
@@ -52,10 +60,11 @@ export const MatchBox: FC<MatchBoxProps> = ({info}) => {
           <div className='px-2'>{info.awayTeam}</div>
         </div>
         <div className='flex justify-evenly items-center w-72'>
-          <button onClick={() => onClickEdit(info.matchId)} className='bg-defaultBg text-defaultColor text-xs px-4 py-1'>Edit</button>
+          <button onClick={openEditMatchPopup} className='bg-defaultBg text-defaultColor text-xs px-4 py-1'>Edit</button>
           <span><img src={CheckMark}/></span>
         </div>
       </div>
+      {isActiveEditMatchPopup && <EditMatchPopupPortal onClose={closeEditMatchPopup} matchId={info.matchId} />}
     </div>
   )
 }

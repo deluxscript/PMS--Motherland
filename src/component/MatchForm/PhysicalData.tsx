@@ -1,7 +1,6 @@
 import {FC} from "react"
-import {Button, Stack} from '@chakra-ui/react'
-import {useWizard} from 'react-use-wizard'
 import {
+  Stack,
   Table,
   Thead,
   Tbody,
@@ -10,32 +9,33 @@ import {
   Th,
   Td,
   TableContainer,
-  NumberInput,
-  NumberInputField,
 } from '@chakra-ui/react'
 
-import {useMatch} from "../../hooks/useMatch"
 import {PlayersProfile} from "../../api"
 import {PhysicalDataItems} from "../../config/constants"
 
 import './Form.css'
+import {Field} from "formik";
 
 type PhysicalDataProps = {
   players: PlayersProfile[] | undefined
 }
 export const PhysicalData: FC<PhysicalDataProps> = ({players}) => {
 
-  const {previousStep, nextStep} = useWizard()
-  const {register} = useMatch()
-
   return <>
-    <div className='text-md font-bold text-center uppercase pb-3'>Physical Data</div>
     <TableContainer>
       <Table variant='simple' size='sm'>
         <Thead>
           <Tr>
             <Th>Players</Th>
-            <Th>Data</Th>
+            <Th>
+              <Stack direction='row' spacing={2}>
+                {PhysicalDataItems.map(item =>
+                  <div key={item.placeholder}
+                  className='min-w-150 w-190 px-2 text-small border-r py-2 text-center'>{item.placeholder}</div>)
+                }
+              </Stack>
+            </Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -45,10 +45,13 @@ export const PhysicalData: FC<PhysicalDataProps> = ({players}) => {
             <Td>
               <Stack direction='row' spacing={2}>
                 {PhysicalDataItems.map(item =>
-                  <NumberInput key={item.name}>
-                    <NumberInputField placeholder={item.placeholder}
-                      minWidth={150} {...register(`stats.${[player.id]}.physicalData.${item.name}`)}/>
-                  </NumberInput>)}
+                  <Field
+                    key={item.name}
+                    name={`stats[${player.id}].physicalData.${item.name}`}
+                    placeholder={item.placeholder}
+                    type='number'
+                    className='min-w-150 h-10 px-4 border rounded outline-0'
+                  />)}
               </Stack>
             </Td>
           </Tr>)}
@@ -56,15 +59,17 @@ export const PhysicalData: FC<PhysicalDataProps> = ({players}) => {
         <Tfoot>
           <Tr>
             <Th>Players</Th>
-            <Th>Data</Th>
+            <Th>
+              <Stack direction='row' spacing={2}>
+                {PhysicalDataItems.map(item =>
+                  <div key={item.placeholder}
+                  className='min-w-150 w-190 px-2 text-small border-r py-2 text-center'>{item.placeholder}</div>)
+                }
+              </Stack>
+            </Th>
           </Tr>
         </Tfoot>
       </Table>
     </TableContainer>
-    <Stack direction="row" spacing={4} mt={10}>
-      <Button type="submit">Save</Button>
-      <Button onClick={previousStep}>Previous</Button>
-      <Button onClick={nextStep}>Next</Button>
-    </Stack>
   </>
 }

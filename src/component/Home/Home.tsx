@@ -1,14 +1,12 @@
 import {FC, useEffect, useState} from "react"
 
 import {ActionDropdownButton, DropdownButton} from "../DropdownButton/DropdownButton"
-import {useSelector} from "react-redux";
+import {useSelector} from "react-redux"
 import { settingsSelector} from "../../store/slices/SettingsSlice"
 import {MonthSchedule} from "../MonthSchedule/MonthSchedule"
-import {MatchBox} from "../MatchBox/MatchBox";
-import {matchData, months} from "../../config/constants"
-import {allMatches, MatchPerformance} from "../../api"
-
-import {useForm} from "@createform/react"
+import {MatchBox} from "../MatchBox/MatchBox"
+import { months } from "../../config/constants"
+import {allMatches} from "../../api"
 
 type HomeProps = {
   allMatches: allMatches[]
@@ -30,7 +28,6 @@ export const Home: FC<HomeProps> = ({allMatches}) => {
   const stats = []
 
   const isStatsEmpty = stats.length === 0
-  console.log('aaa', allMatches)
 
   const pastMonths = [];
   for (let year = currentYear; year >= startYear; year--) {

@@ -1,15 +1,11 @@
 import React, {Children, FC, useState} from "react"
 import {
   Step,
-  StepDescription,
   StepIcon,
   StepIndicator,
-  StepNumber,
   StepSeparator,
   StepStatus,
-  StepTitle,
-  Stepper,
-  useSteps, Box,
+  Stepper, Stack, Text
 } from '@chakra-ui/react'
 import {Formik, Form, FormikConfig, FormikValues} from "formik"
 
@@ -23,18 +19,11 @@ export function FormStep({children}: StepProps) {
 
 export const MatchForm: FC<FormikConfig<FormikValues>> = ({children, ...props}) => {
 
+  // @ts-ignore
   const childrenArray = Children.toArray(children) as React.ReactElement<StepProps>[]
-  console.log({childrenArray})
+
   const [step, setStep] = useState(0)
   const currentChild = childrenArray[step]
-
-  const {activeStep} = useSteps({
-    index: 1,
-    count: childrenArray.length,
-  })
-
-  console.log({activeStep})
-
   function isLastStep() {
     return step === childrenArray.length - 1;
   }
@@ -52,31 +41,29 @@ export const MatchForm: FC<FormikConfig<FormikValues>> = ({children, ...props}) 
       }}
     >
       <Form autoComplete="off">
-        <Stepper index={activeStep}>
-          {childrenArray.map((step, index) => (
-            <Step key={index}>
-              <StepIndicator>
-                <StepStatus
-                  complete={<StepIcon/>}
-                  incomplete={<StepNumber/>}
-                  active={<StepNumber/>}
-                />
-              </StepIndicator>
-
-              <Box flexShrink='0'>
-                <StepTitle>{step.props.label}</StepTitle>
-              </Box>
-
-              <StepSeparator/>
+        <Stack>
+          <Stepper size='sm' index={step} gap={0}>
+            {childrenArray.map((step, index) => (
+              <Step key={index}>
+                <StepIndicator>
+                  <StepStatus
+                    complete={<StepIcon/>}
+                  />
+                </StepIndicator>
+                <StepSeparator />
             </Step>
           ))}
         </Stepper>
+        <Text className='font-bold py-4'>
+          {currentChild.props.label}
+        </Text>
+        </Stack>
         {currentChild}
-        {step > 0 ? <button
-          className="rounded-full py-2 px-4 mr-4 focus:outline-none bg-brandColor text-white font-medium"
-          onClick={() => setStep(s => s - 1)}>Back</button> : null}
+        {step > 0 ? <button type='button'
+          className="rounded py-2 px-8 bg-blackColor text-white mr-5 mt-5 font-medium"
+          onClick={() => setStep(step - 1)}>Back</button> : null}
         <button
-          className="rounded-full py-2 px-4 focus:outline-none bg-black text-white font-medium"
+          className="rounded py-2 px-8 bg-blackColor text-white mt-5 font-medium"
           type="submit">{isLastStep() ? 'Submit' : 'Next'}</button>
       </Form>
     </Formik>

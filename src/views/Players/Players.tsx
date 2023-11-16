@@ -40,6 +40,15 @@ export const Players: FC<PlayersProp> = ({players}) => {
       <div className='my-4'>
         <button className='bg-yellowColor px-8 py-2 font-bold text-white' onClick={openAddPlayerPopup}>Add Player</button>
       </div>
+      <div>dugduhuh</div>
+      <div>dugduhuh</div>
+      <div>dugduhuh</div>
+      <div>dugduhuh</div>
+      <div>dugduhuh</div>
+      <div>dugduhuh</div>
+      <div>dugduhuh</div>
+      <div>dugduhuh</div>
+      <div>dugduhuh</div>
       <Table columns={tableHeads} data={players!!}/>
       {isActiveEditPlayerPopup && <EditPlayerPopupPortal onClose={closeEditPlayerPopup} />}
       {isActiveAddPlayerPopup && <AddPlayerPopupPortal onClose={closeAddPlayerPopup}/>}

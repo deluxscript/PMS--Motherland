@@ -1,10 +1,10 @@
 import {FC} from "react"
 
-export const SchedulePage: FC = () => {
+export const Events: FC = () => {
 
   return (
     <div>
-      Schedule
+      Events
     </div>
   )
 }

@@ -168,11 +168,19 @@ export type Stats = {
 export type matchDataType = {
   timestamp: string
   homeTeam: string
-  homeScore: number
+  homeScore: string
   awayTeam: string
-  awayScore: number
+  awayScore: string
   type: string
   stage: string
+  publish: boolean
+  stats: Stats
+}
+
+export type TrainingDataType = {
+  timestamp: string
+  teamName: string
+  name: string
   publish: boolean
   stats: Stats
 }
@@ -288,4 +296,9 @@ export function getAllMatches(): Promise<allMatches[]> {
         publish: item.publish
       }))
     })
+}
+
+export function updateMatchPerformance(id: number, data: matchDataType): Promise<Response> {
+  return apiRequest(`/match/${id}/match-performances`, 'PUT', data)
+    .then(res => res.json())
 }

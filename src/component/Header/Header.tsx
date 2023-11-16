@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import motherlandLogo from '../../images/home/logo.png'
+import motherlandLogo from '../../assets/images/home/logo.png'
 
 const Header: FC = () => {
   return (

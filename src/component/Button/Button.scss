@@ -1,0 +1,11 @@
+@use '../../assets/styles/colors';
+
+.button {
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 5px;
+
+  &__disabled {
+    cursor: not-allowed;
+  }
+}
