@@ -1,0 +1,28 @@
+@use '../../assets/styles/colors';
+
+.Card {
+  min-height: 320px;
+  background-color: colors.$color-white;
+  border-radius: 5px;
+  padding: 0;
+  box-shadow: 0 6px 7px -5px rgba(50, 50, 93, .1), 0 8px 16px -8px rgba(0, 0, 0, .15), 0 -6px 16px -6px rgba(0, 0, 0, .01);
+  margin-bottom: 20px;
+
+  &__header {
+    padding: 20px 20px 0;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &-title {
+      font-size: 18px;
+      font-weight: 600;
+      padding: 0 5px;
+    }
+  }
+
+  &__content {
+    padding: 0 20px 20px;
+  }
+}

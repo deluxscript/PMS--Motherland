@@ -1,24 +1,20 @@
-import { FC } from 'react';
-import { title } from '../../config/constants';
+import React, { FC, PropsWithChildren } from 'react'
+import {useLocation} from "react-router-dom"
 
 import Header from '../Header/Header';
-import MetaHead from '../MetaHead/MetaHead';
+import MetaHead from '../MetaHead/MetaHead'
 import {routes} from "../../constants/routes";
-import {useLocation} from "react-router-dom";
+import {title} from '../../config/constants'
 
 import './Layout.scss'
 
-type LayoutProps = {
-  children?: React.ReactNode
-}
-
-const Layout: FC<LayoutProps> = ({ children }) => {
+const Layout: FC<PropsWithChildren> = props => {
     const location = useLocation()
 
     return (
         <div className='Layout'>
             <MetaHead title={title}  />
-            {children}
+            {props.children}
         </div>
     )
 }

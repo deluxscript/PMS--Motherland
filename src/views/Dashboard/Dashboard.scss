@@ -1,0 +1,14 @@
+@use '../../assets/styles/colors';
+
+.Dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+
+  &__usefulLinks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+}

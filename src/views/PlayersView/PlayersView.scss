@@ -1,0 +1,7 @@
+@use '../../assets/styles/colors';
+
+.Players-view {
+  &__header {
+    border-bottom: 1px solid colors.$color-flat-grey1;
+  }
+}

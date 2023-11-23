@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react"
 import classnames from "classnames"
-import { Link } from "react-router-dom"
+import {Link, useLocation} from "react-router-dom"
 
 import HomeIcon from "../../assets/images/icons/home.png"
 import Player from "../../assets/images/icons/player.png"
@@ -18,6 +18,7 @@ type SidebarMenuProps = {
 }
 
 type TabType = 'HOME' | 'PLAYERS' | 'MDATA' | 'TDATA' | 'EVENT' | 'MY ACCOUNT' | 'SIGNOUT'
+const sidebarMenu = ['HOME', 'PLAYERS', 'MDATA', 'TDATA', 'EVENT', 'MY ACCOUNT', 'SIGNOUT']
 
 export type SideBarTabsType = {
   /**
@@ -113,14 +114,23 @@ const SidebarMenu:FC<SidebarMenuProps> = props => {
 }
 
 export const Sidebar: FC<{ activeSidebarNav: string }> = ({activeSidebarNav}) => {
-  const [activeTab, setActiveTab] = useState<TabType>('HOME')
+  const location = useLocation()
+  const { pathname } = location
+
+  const [activeTab, setActiveTab] = useState('')
+
+  //This is created to get the active tab if a user just goes directly to a page by its URL
+  const browserActiveTab = sideBarTabs.find(item => item.link === pathname)
+
+  const activeSidebarMenu = activeTab || (browserActiveTab && browserActiveTab.tabType) || sidebarMenu[0]
+
   return (
     <div className="Sidebar">
       {activeSidebarNav === 'ACCOUNT' && sideBarTabs.map(item => (
         <SidebarMenu
           key={item.tabName}
           menu={item}
-          isActive={item.tabType === activeTab}
+          isActive={item.tabType === activeSidebarMenu}
           onClick={() => setActiveTab(item.tabType)}
         />
       ))

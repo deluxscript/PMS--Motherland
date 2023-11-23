@@ -56,12 +56,21 @@ type AuthenticationData = {
   password: string
 }
 
+type User = {
+  username: string
+}
+
 type AuthenticationResult = {
   code: 'OK'
 }
 
 export function loginAuthentication(data: AuthenticationData): Promise<AuthenticationResult> {
   return apiRequest('/login', 'POST', data)
+    .then(res => res.json())
+}
+
+export function getAuthenticatedUser(): Promise<User> {
+  return apiRequest('/user', 'GET')
     .then(res => res.json())
 }
 

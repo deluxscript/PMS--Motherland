@@ -1,14 +1,13 @@
 import { FC } from 'react'
 import { Route, Routes} from 'react-router-dom'
 import { routes } from './constants/routes'
-import { Login } from './views/Login/Login'
 import { Dashboard } from "./views/Dashboard/Dashboard"
 import {useAppController} from "./hooks/useAppController"
-import {Players} from "./views/Players/Players";
-import {MatchData} from "./views/MatchData/MatchData";
-import {TrainingData} from "./views/TrainingData/TrainingData";
-import {Events} from "./views/Events/Events";
-import {MyAccount} from "./views/MyAccount/MyAccount";
+import {PlayersView} from "./views/PlayersView/PlayersView"
+import {MatchData} from "./views/MatchData/MatchData"
+import {TrainingData} from "./views/TrainingData/TrainingData"
+import {Events} from "./views/Events/Events"
+import {MyAccount} from "./views/MyAccount/MyAccount"
 
 export const DashboardRoutes: FC = () => {
   const controller = useAppController()
@@ -16,7 +15,7 @@ export const DashboardRoutes: FC = () => {
       <>
         <Routes>
           <Route path={routes.dashboard} element={<Dashboard />} />
-          <Route path={routes.players} element={<Players players={controller.players.players}/>}/>
+          <Route path={routes.players} element={<PlayersView />}/>
           <Route path={routes.matchData} element={<MatchData />}/>
           <Route path={routes.trainingData} element={<TrainingData />}/>
           <Route path={routes.events} element={<Events />}/>

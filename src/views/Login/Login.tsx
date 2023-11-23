@@ -58,7 +58,7 @@ export const Login: FC = () => {
         <p>{error && error}</p>
       </div>
       <div className='Login__hero'>
-        <img src={player} alt='hero_image'/>
+        <img className='Login__hero-media' src={player} alt='hero_image'/>
       </div>
     </div>
   )

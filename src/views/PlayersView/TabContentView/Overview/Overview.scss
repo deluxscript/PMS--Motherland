@@ -1,0 +1,36 @@
+@use '../../../../assets/styles/colors';
+
+.overview {
+  background-color: colors.$color-white;
+  border-radius: 10px;
+  box-shadow: 0 6px 7px -5px rgba(50, 50, 93, .1), 0 8px 16px -8px rgba(0, 0, 0, .15), 0 -6px 16px -6px rgba(0, 0, 0, .01);
+
+  &__table {
+    padding: 10px;
+    &-header {
+      &--row {
+        background-color: colors.$color-background !important;
+        color: colors.$color-black;
+
+        &-item {
+          padding: 5px !important;
+          text-transform: uppercase;
+          font-size: 12px;
+        }
+      }
+    }
+
+    &-body {
+      &--row {
+
+        &:hover {
+          background-color: colors.$color-background;
+        }
+        &-item {
+          padding: 5px !important;
+        }
+      }
+    }
+  }
+}
+
