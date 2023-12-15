@@ -1,0 +1,68 @@
+@use '../../../assets/styles/colors';
+
+.Game-stats {
+  &__card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    margin-bottom: 10px;
+    border: 1px solid colors.$color-flat-grey1;
+    background-color: colors.$color-white;
+
+    &-dateTime {
+      display: flex;
+      color: colors.$color-sub-text;
+
+      &--date {
+        padding-right: 5px;
+      }
+    }
+    &-info {
+      display: flex;
+      font-weight: 600;
+
+      &--media {
+        padding-right: 5px;
+      }
+    }
+    &-score {
+      display: flex;
+      color: colors.$color-sub-text;
+
+      &--value {
+        padding-right: 5px;
+      }
+
+      &--info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: colors.$color-white;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 2px 6px;
+        width: 25px;
+        height: 25px;
+
+        &-win {
+          background-color: colors.$color-green;
+        }
+        &-loose {
+          background-color: colors.$color-red;
+        }
+        &-draw {
+          background-color: colors.$color-background1
+        }
+      }
+    }
+    &-action {
+      &--link {
+        background-color: colors.$color-dark-blue;
+        color: colors.$color-white;
+        border-radius: 10px;
+        padding: 4px 8px;
+      }
+    }
+  }
+}

@@ -1,7 +1,84 @@
 @use '../../assets/styles/colors';
 
-.Players-view {
+.players-view {
   &__header {
     border-bottom: 1px solid colors.$color-flat-grey1;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 5px;
+    row-gap: 10px;
+    padding: 20px 0;
+
+    &-player-card {
+      padding: 20px;
+      background-color: colors.$color-white;
+      box-shadow: 0 6px 7px -5px rgba(50, 50, 93, .1), 0 8px 16px -8px rgba(0, 0, 0, .15), 0 -6px 16px -6px rgba(0, 0, 0, .01);
+      border-radius: 10px;
+      width: 250px;
+
+      &--media {
+        justify-content: center;
+        display: flex;
+
+        &-image {
+          border-radius: 50%;
+          border: 5px solid;
+        }
+      }
+
+      &--info {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid colors.$color-flat-grey1;
+        padding: 10px 0;
+
+        &-country {
+          font-size: 24px !important;
+          padding-right: 2px;
+        }
+
+        &-name {
+          padding-right: 10px;
+          font-weight: 600;
+          font-size: 18px;
+        }
+        &-position {
+          color: colors.$color-sub-text;
+        }
+      }
+
+      &--data {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+
+        &-appearance {
+          color: colors.$color-sub-text;
+        }
+        &-age {
+          color: colors.$color-sub-text;
+        }
+      }
+
+      &--action {
+        &-link {
+          padding: 2px 8px;
+          border: 1px solid;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          width: fit-content;
+
+          &:hover {
+            color: colors.$color-white;
+            background-color: colors.$color-background1;
+          }
+        }
+      }
+    }
   }
 }

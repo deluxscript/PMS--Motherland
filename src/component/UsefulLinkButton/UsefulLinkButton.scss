@@ -12,11 +12,11 @@
 
   &:hover {
     text-decoration: none;
-    color: colors.$color-yellow;
-    border-color: colors.$color-yellow-shadow;
+    color: colors.$color-dark-blue;
+    border-color: colors.$color-dark-blue-shadow;
 
     .usefulLinkButton__media svg {
-        fill: colors.$color-yellow;
+        fill: colors.$color-dark-blue;
       }
   }
 

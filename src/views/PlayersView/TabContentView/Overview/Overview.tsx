@@ -1,121 +1,77 @@
-import {FC, PropsWithChildren} from "react"
-import classnames from "classnames"
-import {
-  Table,
-  Header,
-  HeaderRow,
-  Body,
-  Row,
-  HeaderCell,
-  Cell,
-} from "@table-library/react-table-library/table";
+import {FC} from "react"
 
 import './Overview.scss'
+import {PlayerType} from "../../../../config/constants";
+import ReactCountryFlag from "react-country-flag";
 
-const nodes = [
-  {
-    id: "0",
-    name: "Operating System",
-    deadline: "2020-02-14T23:00:00.000Z",
-    type: "SETUP",
-    isComplete: true,
-    nodes: null,
-  },
-  {
-    id: "1",
-    name: "VSCode",
-    deadline: "2020-02-16T23:00:00.000Z",
-    type: "SETUP",
-    isComplete: true,
-    nodes: [],
-  },
-  {
-    id: "0",
-    name: "Operating System",
-    deadline: "2020-02-14T23:00:00.000Z",
-    type: "SETUP",
-    isComplete: true,
-    nodes: null,
-  },
-  {
-    id: "1",
-    name: "VSCode",
-    deadline: "2020-02-16T23:00:00.000Z",
-    type: "SETUP",
-    isComplete: true,
-    nodes: [],
-  },
-  {
-    id: "0",
-    name: "Operating System",
-    deadline: "2020-02-14T23:00:00.000Z",
-    type: "SETUP",
-    isComplete: true,
-    nodes: null,
-  },
-  {
-    id: "1",
-    name: "VSCode",
-    deadline: "2020-02-16T23:00:00.000Z",
-    type: "SETUP",
-    isComplete: true,
-    nodes: [],
-  },
-  {
-    id: "0",
-    name: "Operating System",
-    deadline: "2020-02-14T23:00:00.000Z",
-    type: "SETUP",
-    isComplete: true,
-    nodes: null,
-  },
-  {
-    id: "1",
-    name: "VSCode",
-    deadline: "2020-02-16T23:00:00.000Z",
-    type: "SETUP",
-    isComplete: true,
-    nodes: [],
-  }
-]
+type OverviewProps = {
+  playerData: PlayerType | undefined
+}
 
-export const Overview = () => {
-  const data = {nodes}
+export const Overview: FC<OverviewProps> = props => {
   return (
     <div className='overview'>
-      <Table data={data} layout={{fixedHeader: true}} className='overview__table'>
-        {(nodes:any) => (
-          <>
-            <Header className='overview__table-header'>
-              <HeaderRow className='overview__table-header--row'>
-                <HeaderCell className='overview__table-header--row-item'>Name</HeaderCell>
-                <HeaderCell className='overview__table-header--row-item'>Position</HeaderCell>
-                <HeaderCell className='overview__table-header--row-item'>Age</HeaderCell>
-                <HeaderCell className='overview__table-header--row-item'>Nat</HeaderCell>
-                <HeaderCell className='overview__table-header--row-item'>Phone</HeaderCell>
-                <HeaderCell className='overview__table-header--row-item'>Email Address</HeaderCell>
-                <HeaderCell className='overview__table-header--row-item'>Address</HeaderCell>
-              </HeaderRow>
-            </Header>
-
-            <Body className='overview__table-body'>
-              {nodes.map((item:any) => (
-                <Row className='overview__table-body--row' key={item.id} item={item}>
-                  <Cell className='overview__table-body--row-item'>{item.name}</Cell>
-                  <Cell className='overview__table-body--row-item'>
-                    1
-                  </Cell>
-                  <Cell className='overview__table-body--row-item'>{item.type}</Cell>
-                  <Cell className='overview__table-body--row-item'>{item.isComplete.toString()}</Cell>
-                  <Cell className='overview__table-body--row-item'>{item.nodes ? item.nodes.length : "nnnn"}</Cell>
-                  <Cell className='overview__table-body--row-item'>{item.nodes ? item.nodes.length : "nnnn"}</Cell>
-                  <Cell className='overview__table-body--row-item'>{item.nodes ? item.nodes.length : "nnnn"}</Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
+      <div className='overview__section'>
+        <div className='overview__section-title'>Personal Information</div>
+        <div className='overview__section-content'>
+          <div className='overview__section-content--sub'>
+            <div className='overview__section-content--sub-title'>Nationality</div>
+            <div className='overview__section-content--sub-value'>
+              {props.playerData && <><span>{props.playerData.country}</span> <ReactCountryFlag className='overview__section-content--sub-value-icon' countryCode={props.playerData.countryCode}/></>}
+            </div>
+          </div>
+          <div className='overview__personal-content--dob'>
+            <div className='overview__section-content--sub-title'>Date of Birth</div>
+            <div className='overview__section-content--sub-value'>{props.playerData && props.playerData.dob}</div>
+          </div>
+          <div className='overview__personal-content--position'>
+            <div className='overview__section-content--sub-title'>Position</div>
+            <div className='overview__section-content--sub-value'>{props.playerData && props.playerData.position}</div>
+          </div>
+        </div>
+      </div>
+      <div className='overview__section'>
+        <div className='overview__section-title'>Contact Information</div>
+        <div className='overview__section-content'>
+          <div className='overview__section-content--sub'>
+            <div className='overview__section-content--sub-title'>Phone Number</div>
+            <div className='overview__section-content--sub-value'>
+              0810937748379
+            </div>
+          </div>
+          <div className='overview__section-content--sub'>
+            <div className='overview__section-content--sub-title'>Email Address</div>
+            <div className='overview__section-content--sub-value'>deluxscript@gmail.com</div>
+          </div>
+          <div className='overview__section-content--sub'>
+            <div className='overview__section-content--sub-title'>Home Address</div>
+            <div className='overview__section-content--sub-value'>Spahdfege 23, 12734 Berlin</div>
+          </div>
+        </div>
+      </div>
+      <div className='overview__section'>
+        <div className='overview__section-title'>Contract Information</div>
+        <div className='overview__section-content'>
+          <div className='overview__section-content--sub'>
+            <div className='overview__section-content--sub-title'>Contract Type</div>
+            <div className='overview__section-content--sub-value'>
+              Full Time
+            </div>
+          </div>
+          <div className='overview__section-content--sub'>
+            <div className='overview__section-content--sub-title'>Contract start</div>
+            <div className='overview__section-content--sub-value'>01/07/2023</div>
+          </div>
+          <div className='overview__section-content--sub'>
+            <div className='overview__section-content--sub-title'>Contract End</div>
+            <div className='overview__section-content--sub-value'>31/07/2024</div>
+          </div>
+          <div className='overview__section-content--sub'>
+            <div className='overview__section-content--sub-title'>Salary</div>
+            <div className='overview__section-content--sub-value'>-</div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

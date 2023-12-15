@@ -1,0 +1,11 @@
+@use '../../assets/styles/colors';
+
+.Match-data {
+
+  &__tab {
+
+    &-category {
+      border-bottom-width: 3px;
+    }
+  }
+}

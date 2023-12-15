@@ -63,13 +63,6 @@ const sideBarTabs: SideBarTabsType[] = [
     link: '/dashboard/match-data',
   },
   {
-    tabName: 'Training Data',
-    tabType: 'TDATA',
-    image: Training,
-    subText: 'Track training progress',
-    link: '/dashboard/training-data',
-  },
-  {
     tabName: 'Events',
     tabType: 'EVENT',
     image: Schedule,

@@ -1,0 +1,67 @@
+@use '../../../../assets/styles/colors';
+
+.stats {
+  &__header {
+    margin-bottom: 20px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    width: min-content;
+
+    &-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  &__category-header {
+    border-bottom: 1px solid colors.$color-flat-grey1;
+    margin-bottom: 20px;
+
+    &-tabs.Tab-button--active {
+      background-color: colors.$color-dark-blue;
+      color: colors.$color-white;
+      border-radius: 10px 10px 0 0;
+      border-bottom: 0;
+    }
+  }
+
+  &__content {
+    background-color: colors.$color-white;
+    border-radius: 10px;
+    box-shadow: 0 6px 7px -5px rgba(50, 50, 93, .1), 0 8px 16px -8px rgba(0, 0, 0, .15), 0 -6px 16px -6px rgba(0, 0, 0, .01);
+
+    &-table {
+      padding: 10px;
+      width: 100%;
+
+      &-header {
+        &--row {
+          background-color: colors.$color-dark-blue2;
+          color: colors.$color-white;
+
+          &-item {
+            padding: 5px;
+            font-size: 12px;
+          }
+        }
+      }
+
+      &-body {
+        &--row {
+          text-align: center;
+
+          &:hover {
+            background-color: colors.$color-background;
+          }
+
+          &-item {
+            padding: 5px !important;
+          }
+        }
+      }
+    }
+  }
+}
+

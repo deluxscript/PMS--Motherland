@@ -16,7 +16,7 @@
       &--active {
         cursor: default;
         background: colors.$color-background;
-        border-right: 3px solid colors.$color-yellow;
+        border-right: 3px solid colors.$color-dark-blue;
       }
 
       &-media {
@@ -31,7 +31,7 @@
         height: 34px;
 
         &--active {
-          background-color: colors.$color-yellow;
+          background-color: colors.$color-dark-blue;
         }
       }
 

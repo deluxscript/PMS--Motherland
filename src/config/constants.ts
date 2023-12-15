@@ -1,8 +1,99 @@
+import DefaultPlayerImage from '../assets/images/test.png'
+import DefaultPlayerImage2 from '../assets/images/test2.png'
+import DefaultPlayerImage3 from '../assets/images/test3.png'
 export const title = 'Player Management System | Motherland SC Berlin'
 
 export const months = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'
+]
+
+export type PlayerType = {
+  id: number
+  countryCode: string
+  country: string
+  dob: string
+  name: string
+  position: string
+  age: string
+  appearance: string
+  number: string
+  imgSrc: string
+}
+
+export const players: PlayerType[] = [
+  {
+    id: 123,
+    countryCode: 'NG',
+    country: 'Nigeria',
+    name: 'Abdul Jabber',
+    position: 'CM',
+    dob: '11/02/2002',
+    age: '21',
+    appearance: '52',
+    number: '10',
+    imgSrc: DefaultPlayerImage
+  },
+  {
+    id: 433,
+    countryCode: 'US',
+    country: 'United States of America',
+    name: 'Rashad Dennis',
+    position: 'CF',
+    dob: '14/05/2005',
+    age: '18',
+    appearance: '102',
+    number: '9',
+    imgSrc: DefaultPlayerImage2
+  },
+  {
+    id: 221,
+    countryCode: 'GB',
+    country: 'United Kingdom',
+    name: 'Mid Better',
+    position: 'GK',
+    dob: '11/01/1994',
+    age: '29',
+    appearance: '5',
+    number: '1',
+    imgSrc: DefaultPlayerImage3
+  },
+  {
+    id: 78,
+    countryCode: 'IE',
+    country: 'Ireland',
+    name: 'Abdul Jabber',
+    position: 'CM',
+    dob: '11/02/2002',
+    age: '21',
+    appearance: '52',
+    number: '8',
+    imgSrc: DefaultPlayerImage
+  },
+  {
+    id: 12,
+    countryCode: 'GH',
+    country: 'Ghana',
+    name: 'Rashad Dennis',
+    position: 'LB',
+    dob: '11/02/2005',
+    age: '18',
+    appearance: '102',
+    number: '3',
+    imgSrc: DefaultPlayerImage2
+  },
+  {
+    id: 3,
+    countryCode: 'NG',
+    country: 'Nigeria',
+    name: 'Mid Better',
+    position: 'GK',
+    dob: '16/01/1994',
+    age: '29',
+    appearance: '5',
+    number: '12',
+    imgSrc: DefaultPlayerImage3
+  }
 ]
 
 export const matchData = [
@@ -320,5 +411,88 @@ export const PhysicalDataItems = [
   {
     name: 'maximumSpeed',
     placeholder: 'Maximum Speed',
+  },
+]
+
+export type DefensiveStatsType = {
+  date: string
+  opponentName: string
+  minutes: string
+  tackles: string
+  successfulTackles: string
+  interception: string
+  successfulInterceptions: string
+  fouls: string
+  clearance: string
+  ownGoals: string
+  blocks: string
+}
+
+export const sampleDefensiveData:DefensiveStatsType[] = [
+  {
+    date: '2023-01-01',
+    opponentName: 'Team A',
+    minutes: '90',
+    tackles: '5',
+    successfulTackles: '4',
+    interception: '2',
+    successfulInterceptions: '2',
+    fouls: '3',
+    clearance: '6',
+    ownGoals: '0',
+    blocks: '1',
+  },
+  {
+    date: '2023-01-10',
+    opponentName: 'Team B',
+    minutes: '90',
+    tackles: '3',
+    successfulTackles: '3',
+    interception: '1',
+    successfulInterceptions: '1',
+    fouls: '2',
+    clearance: '4',
+    ownGoals: '0',
+    blocks: '2',
+  }
+]
+
+export type OffensiveStatsType = {
+  date: string
+  opponentName: string
+  minutes: string
+  goals: string
+  assists: string
+  sonT: string
+  sOffT: string
+  drb: string
+  fouled: string
+  disp: string
+}
+
+export const sampleOffensiveData:OffensiveStatsType[] = [
+  {
+    date: '2023-01-05',
+    opponentName: 'Team C',
+    minutes: '90',
+    goals: '2',
+    assists: '1',
+    sonT: '5',
+    sOffT: '3',
+    drb: '2',
+    fouled: '3',
+    disp: '1',
+  },
+  {
+    date: '2023-01-15',
+    opponentName: 'Team D',
+    minutes: '90',
+    goals: '1',
+    assists: '2',
+    sonT: '3',
+    sOffT: '2',
+    drb: '3',
+    fouled: '2',
+    disp: '2',
   },
 ]

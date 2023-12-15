@@ -8,6 +8,7 @@ import {MatchData} from "./views/MatchData/MatchData"
 import {TrainingData} from "./views/TrainingData/TrainingData"
 import {Events} from "./views/Events/Events"
 import {MyAccount} from "./views/MyAccount/MyAccount"
+import {SinglePlayerView} from "./views/SinglePlayerView/SinglePlayerView"
 
 export const DashboardRoutes: FC = () => {
   const controller = useAppController()
@@ -16,6 +17,7 @@ export const DashboardRoutes: FC = () => {
         <Routes>
           <Route path={routes.dashboard} element={<Dashboard />} />
           <Route path={routes.players} element={<PlayersView />}/>
+          <Route path={routes.singlePlayer} element={<SinglePlayerView/>}/>
           <Route path={routes.matchData} element={<MatchData />}/>
           <Route path={routes.trainingData} element={<TrainingData />}/>
           <Route path={routes.events} element={<Events />}/>
